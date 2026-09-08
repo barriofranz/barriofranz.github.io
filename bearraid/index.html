@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Bear Raid board</title>
+
+	<link
+		href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+		rel="stylesheet"
+		integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+		crossorigin="anonymous"
+	>
+	<style>
+		.cell-yellow {
+			background-color: yellow !important;
+			color: #111 !important;
+		}
+
+		.cell-orange {
+			background-color: orange !important;
+			color: #111 !important;
+		}
+
+		.cell-red {
+			background-color: red !important;;
+			color: #fff !important;
+		}
+
+		.cell-blue {
+			background-color: blue !important;
+			color: #fff !important;
+		}
+
+		.cell-purple {
+			background-color: purple !important;
+			color: #fff !important;
+		}
+
+		.cell-green {
+			background-color: green !important;;
+			color: #fff !important;
+		}
+
+        select#roundNumberSelect,
+        select#roundSideSelect {
+            border: 1px solid #000;
+            min-height: 48px;
+        }
+		.showscrollbar {
+			white-space: nowrap;
+			-webkit-overflow-scrolling: touch;
+		}
+
+		#companyInput:focus,
+		#qtyInput:focus {
+			outline: 2px solid #000;
+			outline-offset: 2px;
+		}
+	</style>
+</head>
+<body>
+	<div class="container py-4">
+		
+
+		<div class="table-responsive mt-5">
+			<table class="table table-bordered align-middle summary-table">
+				<thead class="table-light">
+					<tr>
+						<th scope="col"></th>
+						<th scope="col" class="cell-yellow">Banana</th>
+						<th scope="col" class="cell-red">Edison</th>
+						<th scope="col" class="cell-purple">Gamestart</th>
+						<th scope="col" class="cell-blue">Gazillion</th>
+						<th scope="col" class="cell-orange">Nile</th>
+						<th scope="col" class="cell-green">Unusual Oil</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr id="ownedRow">
+						<th scope="row">Owned</th>
+						<td data-company="banana">0</td>
+						<td data-company="edison">0</td>
+						<td data-company="gamestart">0</td>
+						<td data-company="gazillion">0</td>
+						<td data-company="nile">0</td>
+						<td data-company="unusual_oil">0</td>
+					</tr>
+					<tr id="shortedRow">
+						<th scope="row">Shorted</th>
+						<td data-company="banana">0</td>
+						<td data-company="edison">0</td>
+						<td data-company="gamestart">0</td>
+						<td data-company="gazillion">0</td>
+						<td data-company="nile">0</td>
+						<td data-company="unusual_oil">0</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+
+		<div class="table-responsive my-5 showscrollbar">
+			<div class="row g-2 mb-3">
+				<div class="col-6 col-md-4">
+					<select class="form-select form-select-sm" id="roundNumberSelect">
+						<option value="1" selected>Round 1</option>
+						<option value="2">Round 2</option>
+						<option value="3">Round 3</option>
+						<option value="4">Round 4</option>
+						<option value="5">Round 5</option>
+						<option value="6">Round 6</option>
+						<option value="7">Round 7</option>
+						<option value="8">Round 8</option>
+						<option value="9">Round 9</option>
+					</select>
+				</div>
+				<div class="col-6 col-md-3">
+					<select class="form-select form-select-sm" id="roundSideSelect">
+						<option value="a" selected>Turn A</option>
+						<option value="b">Turn B</option>
+					</select>
+				</div>
+			</div>
+
+			<table class="table table-bordered table-striped align-middle mb-0 transaction-table">
+				<thead class="table-light">
+					<tr>
+						<th scope="col"></th>
+						<th scope="col">Company</th>
+						<th scope="col">Quantity</th>
+					</tr>
+				</thead>
+				<tbody id="dataRows">
+					<tr id="entryRow" class="table-light">
+						<td class="text-muted"><button type="button" class="btn btn-sm btn-primary w-100" id="addRowBtn">+</button></td>
+						<td>
+							<select class="form-select form-select-sm" id="companyInput">
+								<option value="" selected></option>
+								<option value="banana" data-color="yellow">Banana</option>
+								<option value="edison" data-color="red">Edison</option>
+								<option value="gamestart" data-color="purple">Gamestart</option>
+								<option value="gazillion" data-color="blue">Gazillion</option>
+								<option value="nile" data-color="orange">Nile</option>
+								<option value="unusual_oil" data-color="green">Unusual Oil</option>
+							</select>
+						</td>
+						<td><input type="number" class="form-control form-control-sm" id="qtyInput" placeholder="Qty" step="1"></td>
+						
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="mt-5">
+			<!-- <button type="button" class="btn btn-sm btn-outline-danger" id="clearSessionBtn">Clear Session</button> -->
+		</div>
+
+
+	</div>
+
+	<script
+		src="https://code.jquery.com/jquery-3.7.1.min.js"
+		integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+		crossorigin="anonymous"
+	></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+		crossorigin="anonymous"
+	></script>
+	<script>
+		$(function () {
+			var STORAGE_KEY = "bearRaidTransactions";
+
+			function readTransactions() {
+				var raw = sessionStorage.getItem(STORAGE_KEY);
+				if (!raw) {
+					return [];
+				}
+
+				try {
+					var parsed = JSON.parse(raw);
+					return Array.isArray(parsed) ? parsed : [];
+				} catch (e) {
+					return [];
+				}
+			}
+
+			function writeTransactions(transactions) {
+				sessionStorage.setItem(STORAGE_KEY, JSON.stringify(transactions));
+			}
+
+			function getNextTransactionId(transactions) {
+				var maxId = transactions.reduce(function (max, tx) {
+					var txId = parseInt(tx.id, 10);
+					if (isNaN(txId)) {
+						return max;
+					}
+					return Math.max(max, txId);
+				}, 0);
+
+				return maxId + 1;
+			}
+
+			function updateSummary(company, qty) {
+				var ownedCell = $("#ownedRow td[data-company='" + company + "']");
+				var shortedCell = $("#shortedRow td[data-company='" + company + "']");
+
+				var ownedQty = parseFloat(ownedCell.text()) || 0;
+				var shortedQty = parseFloat(shortedCell.text()) || 0;
+
+				if (qty > 0) {
+					var remainingToAdd = qty;
+
+					if (shortedQty > 0) {
+						var covered = Math.min(shortedQty, remainingToAdd);
+						shortedQty -= covered;
+						remainingToAdd -= covered;
+					}
+
+					if (remainingToAdd > 0) {
+						ownedQty += remainingToAdd;
+					}
+				} else if (qty < 0) {
+					var remainingToSubtract = Math.abs(qty);
+
+					if (ownedQty > 0) {
+						var deducted = Math.min(ownedQty, remainingToSubtract);
+						ownedQty -= deducted;
+						remainingToSubtract -= deducted;
+					}
+
+					if (remainingToSubtract > 0) {
+						shortedQty += remainingToSubtract;
+					}
+				}
+
+				ownedCell.text(ownedQty);
+				shortedCell.text(shortedQty);
+			}
+
+			function resetSummary() {
+				$("#ownedRow td[data-company], #shortedRow td[data-company]").text("0");
+			}
+
+			function renderTransactions(transactions) {
+				$("#dataRows tr").not("#entryRow").remove();
+
+				transactions.forEach(function (tx, index) {
+					var displayId = parseInt(tx.id, 10);
+					if (isNaN(displayId)) {
+						displayId = transactions.length - index;
+					}
+					var displayRound = tx.round || displayId;
+
+					var rowHtml = "<tr>" +
+						"<td>" + displayRound + "</td>" +
+						"<td class=\"company-cell\">" + tx.companyLabel + "</td>" +
+						"<td>" + tx.qty + "</td>" +
+						"</tr>";
+
+					var newRow = $(rowHtml);
+					if (tx.companyColor) {
+						newRow.find(".company-cell")
+							.css("background-color", tx.companyColor)
+							.addClass("cell-" + tx.companyColor);
+					}
+
+					$("#dataRows").append(newRow);
+				});
+			}
+
+			function rebuildSummary(transactions) {
+				resetSummary();
+				transactions.forEach(function (tx) {
+					updateSummary(tx.company, tx.qty);
+				});
+			}
+
+			$("#addRowBtn").on("click", function () {
+				var selectedCompanyOption = $("#companyInput option:selected");
+				var selectedRound = $("#roundNumberSelect").val() + "-" + $("#roundSideSelect").val();
+				var company = selectedCompanyOption.val().toString().trim();
+				var companyLabel = selectedCompanyOption.text().trim();
+				var companyColor = selectedCompanyOption.data("color");
+				var qty = parseFloat($("#qtyInput").val()) || 0;
+
+				if (!company) {
+					$("#companyInput").trigger("focus");
+					return;
+				}
+
+				if (qty === 0) {
+					$("#qtyInput").trigger("focus");
+					return;
+				}
+
+				var transactions = readTransactions();
+				var transactionId = getNextTransactionId(transactions);
+				transactions.unshift({
+					id: transactionId,
+					round: selectedRound,
+					company: company,
+					companyLabel: companyLabel,
+					companyColor: companyColor,
+					qty: qty
+				});
+				writeTransactions(transactions);
+				renderTransactions(transactions);
+				rebuildSummary(transactions);
+
+				$("#companyInput").val("");
+				$("#qtyInput").val("");
+				$("#companyInput").trigger("focus");
+			});
+
+			$("#clearSessionBtn").on("click", function () {
+				var shouldClear = window.confirm("Clear all session data? This cannot be undone for this tab session.");
+				if (!shouldClear) {
+					return;
+				}
+
+				sessionStorage.removeItem(STORAGE_KEY);
+				renderTransactions([]);
+				rebuildSummary([]);
+				$("#companyInput").val("");
+				$("#qtyInput").val("");
+				$("#companyInput").trigger("focus");
+			});
+
+			var initialTransactions = readTransactions();
+			renderTransactions(initialTransactions);
+			rebuildSummary(initialTransactions);
+		});
+	</script>
+</body>
+</html>
