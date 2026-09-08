@@ -84,6 +84,10 @@
 			background: #7dc0c2;
 			border-radius: 10px;
 		}
+
+		.summary-table th {
+			white-space: nowrap;
+		}
 	</style>
 </head>
 <body>
@@ -97,7 +101,6 @@
 						<th scope="col"></th>
 						<th scope="col" class="cell-yellow">Banana</th>
 						<th scope="col" class="cell-red">Edison</th>
-						<th scope="col" class="cell-purple">Gamestart</th>
 						<th scope="col" class="cell-blue">Gazillion</th>
 						<th scope="col" class="cell-orange">Nile</th>
 						<th scope="col" class="cell-green">Unusual Oil</th>
@@ -108,7 +111,6 @@
 						<th scope="row">Owned</th>
 						<td data-company="banana">0</td>
 						<td data-company="edison">0</td>
-						<td data-company="gamestart">0</td>
 						<td data-company="gazillion">0</td>
 						<td data-company="nile">0</td>
 						<td data-company="unusual_oil">0</td>
@@ -117,7 +119,6 @@
 						<th scope="row">Shorted</th>
 						<td data-company="banana">0</td>
 						<td data-company="edison">0</td>
-						<td data-company="gamestart">0</td>
 						<td data-company="gazillion">0</td>
 						<td data-company="nile">0</td>
 						<td data-company="unusual_oil">0</td>
@@ -166,7 +167,6 @@
 								<option value="" selected></option>
 								<option value="banana" data-color="yellow">Banana</option>
 								<option value="edison" data-color="red">Edison</option>
-								<option value="gamestart" data-color="purple">Gamestart</option>
 								<option value="gazillion" data-color="blue">Gazillion</option>
 								<option value="nile" data-color="orange">Nile</option>
 								<option value="unusual_oil" data-color="green">Unusual Oil</option>
