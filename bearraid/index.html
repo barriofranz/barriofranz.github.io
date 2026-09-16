@@ -85,6 +85,9 @@
 			border-radius: 10px;
 		}
 
+		.summary-table {
+			display: none;
+		}
 		.summary-table th {
 			white-space: nowrap;
 		}
@@ -99,29 +102,29 @@
 				<thead class="table-light">
 					<tr>
 						<th scope="col"></th>
-						<th scope="col" class="cell-yellow">Banana</th>
 						<th scope="col" class="cell-red">Edison</th>
-						<th scope="col" class="cell-blue">Gazillion</th>
 						<th scope="col" class="cell-orange">Nile</th>
 						<th scope="col" class="cell-green">Unusual Oil</th>
+						<th scope="col" class="cell-yellow">Banana</th>
+						<th scope="col" class="cell-blue">Gazillion</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr id="ownedRow">
 						<th scope="row">Owned</th>
-						<td data-company="banana">0</td>
 						<td data-company="edison">0</td>
-						<td data-company="gazillion">0</td>
 						<td data-company="nile">0</td>
 						<td data-company="unusual_oil">0</td>
+						<td data-company="banana">0</td>
+						<td data-company="gazillion">0</td>
 					</tr>
 					<tr id="shortedRow">
 						<th scope="row">Shorted</th>
-						<td data-company="banana">0</td>
 						<td data-company="edison">0</td>
-						<td data-company="gazillion">0</td>
 						<td data-company="nile">0</td>
 						<td data-company="unusual_oil">0</td>
+						<td data-company="banana">0</td>
+						<td data-company="gazillion">0</td>
 					</tr>
 				</tbody>
 			</table>
@@ -165,11 +168,11 @@
 						<td>
 							<select class="form-select form-select-sm" id="companyInput">
 								<option value="" selected></option>
-								<option value="banana" data-color="yellow">Banana</option>
 								<option value="edison" data-color="red">Edison</option>
-								<option value="gazillion" data-color="blue">Gazillion</option>
 								<option value="nile" data-color="orange">Nile</option>
 								<option value="unusual_oil" data-color="green">Unusual Oil</option>
+								<option value="banana" data-color="yellow">Banana</option>
+								<option value="gazillion" data-color="blue">Gazillion</option>
 							</select>
 						</td>
 						<td><input type="number" class="form-control form-control-sm" id="qtyInput" placeholder="Qty" step="1"></td>
