@@ -91,98 +91,71 @@
 		.summary-table th {
 			white-space: nowrap;
 		}
+
+		.nav-tabs {
+			gap: 0.5rem;
+			border: none;
+			padding-bottom: 0.25rem;
+			margin-bottom: 0;
+		}
+		.nav-tabs .nav-item {
+			margin: 0;
+		}
+		.nav-tabs .nav-link {
+			border: 1px solid rgba(0, 0, 0, 0.2);
+			border-radius: 0.9rem 0.9rem 0.75rem 0.75rem;
+			padding: 0.7rem 1.2rem;
+			font-weight: 600;
+			color: #1a1a1a;
+			background: linear-gradient(180deg, #ffffff 0%, #f3f5f7 100%);
+			transition: all 0.2s ease-in-out;
+			box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+			position: relative;
+			overflow: visible;
+		}
+		.nav-tabs .nav-link:hover {
+			transform: translateY(-1px);
+			box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+		}
+		.nav-tabs .nav-link.active {
+			background: linear-gradient(180deg, #111111 0%, #000000 100%);
+			color: #fff;
+			border-color: #000;
+			box-shadow: 0 5px 14px rgba(0, 0, 0, 0.18);
+		}
 	</style>
 </head>
 <body>
 	<div class="container py-4">
 		
 
-		<div class="table-responsive mt-5 scrollstyled">
-			<table class="table table-bordered align-middle summary-table ">
-				<thead class="table-light">
-					<tr>
-						<th scope="col"></th>
-						<th scope="col" class="cell-red">Edison</th>
-						<th scope="col" class="cell-orange">Nile</th>
-						<th scope="col" class="cell-green">Unusual Oil</th>
-						<th scope="col" class="cell-yellow">Banana</th>
-						<th scope="col" class="cell-blue">Gazillion</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr id="ownedRow">
-						<th scope="row">Owned</th>
-						<td data-company="edison">0</td>
-						<td data-company="nile">0</td>
-						<td data-company="unusual_oil">0</td>
-						<td data-company="banana">0</td>
-						<td data-company="gazillion">0</td>
-					</tr>
-					<tr id="shortedRow">
-						<th scope="row">Shorted</th>
-						<td data-company="edison">0</td>
-						<td data-company="nile">0</td>
-						<td data-company="unusual_oil">0</td>
-						<td data-company="banana">0</td>
-						<td data-company="gazillion">0</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-
-
-		<div class="table-responsive my-5 showscrollbar">
-			<div class="row g-2 mb-3">
-				<div class="col-6 col-md-4">
-					<select class="form-select form-select-sm" id="roundNumberSelect">
-						<option value="1" selected>Round 1</option>
-						<option value="2">Round 2</option>
-						<option value="3">Round 3</option>
-						<option value="4">Round 4</option>
-						<option value="5">Round 5</option>
-						<option value="6">Round 6</option>
-						<option value="7">Round 7</option>
-						<option value="8">Round 8</option>
-						<option value="9">Round 9</option>
-					</select>
-				</div>
-				<div class="col-6 col-md-3">
-					<select class="form-select form-select-sm" id="roundSideSelect">
-						<option value="a" selected>Turn A</option>
-						<option value="b">Turn B</option>
-					</select>
-				</div>
+		<div class="row g-2 mb-3 mt-2">
+			<div class="col-6 col-md-4">
+				<select class="form-select form-select-sm" id="roundNumberSelect">
+					<option value="1" selected>Round 1</option>
+					<option value="2">Round 2</option>
+					<option value="3">Round 3</option>
+					<option value="4">Round 4</option>
+					<option value="5">Round 5</option>
+					<option value="6">Round 6</option>
+					<option value="7">Round 7</option>
+					<option value="8">Round 8</option>
+					<option value="9">Round 9</option>
+				</select>
 			</div>
-
-			<table class="table table-bordered table-striped align-middle mb-0 transaction-table">
-				<thead class="table-light">
-					<tr>
-						<th scope="col">Company</th>
-						<th scope="col">Quantity</th>
-						<th scope="col"></th>
-					</tr>
-				</thead>
-				<tbody id="dataRows">
-					<tr id="entryRow" class="table-light">
-						
-						<td>
-							<select class="form-select form-select-sm" id="companyInput">
-								<option value="" selected></option>
-								<option value="edison" data-color="red">Edison</option>
-								<option value="nile" data-color="orange">Nile</option>
-								<option value="unusual_oil" data-color="green">Unusual Oil</option>
-								<option value="banana" data-color="yellow">Banana</option>
-								<option value="gazillion" data-color="blue">Gazillion</option>
-							</select>
-						</td>
-						<td><input type="number" class="form-control form-control-sm" id="qtyInput" placeholder="Qty" step="1"></td>
-						<td class="text-muted"><button type="button" class="btn btn-sm btn-primary w-100" id="addRowBtn">+</button></td>
-						
-						
-					</tr>
-				</tbody>
-			</table>
+			<div class="col-6 col-md-3">
+				<select class="form-select form-select-sm" id="roundSideSelect">
+					<option value="a" selected>Turn A</option>
+					<option value="b">Turn B</option>
+				</select>
+			</div>
 		</div>
+
+		<div class="table-responsive mt-5 mb-1">
+			<ul class="nav nav-tabs" id="playerTabs" role="tablist"></ul>
+		</div>
+
+		<div class="tab-content mt-3" id="playerTabContent"></div>
 		<div class="mt-5">
 			<!-- <button type="button" class="btn btn-sm btn-outline-danger" id="clearSessionBtn">Clear Session</button> -->
 		</div>
@@ -203,9 +176,14 @@
 	<script>
 		$(function () {
 			var STORAGE_KEY = "bearRaidTransactions";
+			var PLAYER_COUNT = 5;
 
-			function readTransactions() {
-				var raw = sessionStorage.getItem(STORAGE_KEY);
+			function getPlayerStorageKey(playerIndex) {
+				return STORAGE_KEY + "_player_" + playerIndex;
+			}
+
+			function readTransactionsForPlayer(playerIndex) {
+				var raw = sessionStorage.getItem(getPlayerStorageKey(playerIndex));
 				if (!raw) {
 					return [];
 				}
@@ -218,8 +196,8 @@
 				}
 			}
 
-			function writeTransactions(transactions) {
-				sessionStorage.setItem(STORAGE_KEY, JSON.stringify(transactions));
+			function writeTransactionsForPlayer(playerIndex, transactions) {
+				sessionStorage.setItem(getPlayerStorageKey(playerIndex), JSON.stringify(transactions));
 			}
 
 			function getNextTransactionId(transactions) {
@@ -234,9 +212,9 @@
 				return maxId + 1;
 			}
 
-			function updateSummary(company, qty) {
-				var ownedCell = $("#ownedRow td[data-company='" + company + "']");
-				var shortedCell = $("#shortedRow td[data-company='" + company + "']");
+			function updateSummaryForPlayer(playerIndex, company, qty) {
+				var ownedCell = $("#ownedRow-" + playerIndex + " td[data-company='" + company + "']");
+				var shortedCell = $("#shortedRow-" + playerIndex + " td[data-company='" + company + "']");
 
 				var ownedQty = parseFloat(ownedCell.text()) || 0;
 				var shortedQty = parseFloat(shortedCell.text()) || 0;
@@ -271,12 +249,13 @@
 				shortedCell.text(shortedQty);
 			}
 
-			function resetSummary() {
-				$("#ownedRow td[data-company], #shortedRow td[data-company]").text("0");
+			function resetSummaryForPlayer(playerIndex) {
+				$("#ownedRow-" + playerIndex + " td[data-company], #shortedRow-" + playerIndex + " td[data-company]").text("0");
 			}
 
-			function renderTransactions(transactions) {
-				$("#dataRows tr").not("#entryRow").remove();
+			function renderTransactionsForPlayer(playerIndex, transactions) {
+				var $dataRows = $("#player-tab-" + playerIndex + " .player-data-rows");
+				$dataRows.find("tr").not(".entry-row").remove();
 
 				transactions.forEach(function (tx, index) {
 					var displayId = parseInt(tx.id, 10);
@@ -298,36 +277,122 @@
 							.addClass("cell-" + tx.companyColor);
 					}
 
-					$("#dataRows").append(newRow);
+					$dataRows.append(newRow);
 				});
 			}
 
-			function rebuildSummary(transactions) {
-				resetSummary();
+			function rebuildSummaryForPlayer(playerIndex, transactions) {
+				resetSummaryForPlayer(playerIndex);
 				transactions.forEach(function (tx) {
-					updateSummary(tx.company, tx.qty);
+					updateSummaryForPlayer(playerIndex, tx.company, tx.qty);
 				});
 			}
 
-			$("#addRowBtn").on("click", function () {
-				var selectedCompanyOption = $("#companyInput option:selected");
+			function buildPlayerTabContent(playerIndex) {
+				var tabId = "player-tab-" + playerIndex;
+				var isActive = playerIndex === 1 ? " show active" : "";
+
+				return [
+					'<div class="tab-pane fade' + isActive + '" id="' + tabId + '" role="tabpanel" data-player-index="' + playerIndex + '">',
+					'<div class="table-responsive mt-3 scrollstyled">',
+					'<table class="table table-bordered align-middle summary-table">',
+					'<thead class="table-light">',
+					'<tr>',
+					'<th scope="col"></th>',
+					'<th scope="col" class="cell-red">Edison</th>',
+					'<th scope="col" class="cell-orange">Nile</th>',
+					'<th scope="col" class="cell-green">Unusual Oil</th>',
+					'<th scope="col" class="cell-yellow">Banana</th>',
+					'<th scope="col" class="cell-blue">Gazillion</th>',
+					'</tr>',
+					'</thead>',
+					'<tbody>',
+					'<tr id="ownedRow-' + playerIndex + '">',
+					'<th scope="row">Owned</th>',
+					'<td data-company="edison">0</td>',
+					'<td data-company="nile">0</td>',
+					'<td data-company="unusual_oil">0</td>',
+					'<td data-company="banana">0</td>',
+					'<td data-company="gazillion">0</td>',
+					'</tr>',
+					'<tr id="shortedRow-' + playerIndex + '">',
+					'<th scope="row">Shorted</th>',
+					'<td data-company="edison">0</td>',
+					'<td data-company="nile">0</td>',
+					'<td data-company="unusual_oil">0</td>',
+					'<td data-company="banana">0</td>',
+					'<td data-company="gazillion">0</td>',
+					'</tr>',
+					'</tbody>',
+					'</table>',
+					'</div>',
+					'<div class="table-responsive my-5 showscrollbar">',
+					'<table class="table table-bordered table-striped align-middle mb-0 transaction-table">',
+					'<thead class="table-light"><tr><th scope="col">Company</th><th scope="col">Quantity</th><th scope="col"></th></tr></thead>',
+					'<tbody class="player-data-rows">',
+					'<tr class="table-light entry-row">',
+					'<td><select class="form-select form-select-sm company-input" id="companyInput-' + playerIndex + '">',
+					'<option value="" selected></option>',
+					'<option value="edison" data-color="red">Edison</option>',
+					'<option value="nile" data-color="orange">Nile</option>',
+					'<option value="unusual_oil" data-color="green">Unusual Oil</option>',
+					'<option value="banana" data-color="yellow">Banana</option>',
+					'<option value="gazillion" data-color="blue">Gazillion</option>',
+					'</select></td>',
+					'<td><input type="number" class="form-control form-control-sm qty-input" id="qtyInput-' + playerIndex + '" placeholder="Qty" step="1"></td>',
+					'<td class="text-muted"><button type="button" class="btn btn-sm btn-primary w-100 add-row-btn" data-player-index="' + playerIndex + '">+</button></td>',
+					'</tr>',
+					'</tbody>',
+					'</table>',
+					'</div>',
+					'</div>'
+				].join('');
+			}
+
+			function buildPlayerTabs() {
+				var $tabs = $("#playerTabs");
+				var $content = $("#playerTabContent");
+
+				$tabs.empty();
+				$content.empty();
+
+				for (var i = 1; i <= PLAYER_COUNT; i++) {
+					var tabId = "player-tab-" + i;
+					var $tabButton = $(
+						'<li class="nav-item" role="presentation">' +
+						'<button class="nav-link' + (i === 1 ? ' active' : '') + '" data-bs-toggle="tab" data-bs-target="#' + tabId + '" type="button" role="tab" aria-controls="' + tabId + '" aria-selected="' + (i === 1 ? 'true' : 'false') + '">Player ' + i + '</button>' +
+						'</li>'
+					);
+
+					$tabs.append($tabButton);
+					$content.append(buildPlayerTabContent(i));
+
+					var transactions = readTransactionsForPlayer(i);
+					renderTransactionsForPlayer(i, transactions);
+				}
+			}
+
+			$("#playerTabContent").on("click", ".add-row-btn", function () {
+				var playerIndex = parseInt($(this).data("playerIndex"), 10) || 1;
+				var $pane = $("#player-tab-" + playerIndex);
+				var selectedCompanyOption = $pane.find(".company-input option:selected");
 				var selectedRound = $("#roundNumberSelect").val() + "-" + $("#roundSideSelect").val();
-				var company = selectedCompanyOption.val().toString().trim();
+				var company = selectedCompanyOption.val() ? selectedCompanyOption.val().toString().trim() : "";
 				var companyLabel = selectedCompanyOption.text().trim();
 				var companyColor = selectedCompanyOption.data("color");
-				var qty = parseFloat($("#qtyInput").val()) || 0;
+				var qty = parseFloat($pane.find("#qtyInput-" + playerIndex).val()) || 0;
 
 				if (!company) {
-					$("#companyInput").trigger("focus");
+					$pane.find(".company-input").trigger("focus");
 					return;
 				}
 
 				if (qty === 0) {
-					$("#qtyInput").trigger("focus");
+					$pane.find(".qty-input").trigger("focus");
 					return;
 				}
 
-				var transactions = readTransactions();
+				var transactions = readTransactionsForPlayer(playerIndex);
 				var transactionId = getNextTransactionId(transactions);
 				transactions.unshift({
 					id: transactionId,
@@ -337,13 +402,13 @@
 					companyColor: companyColor,
 					qty: qty
 				});
-				writeTransactions(transactions);
-				renderTransactions(transactions);
-				rebuildSummary(transactions);
+				writeTransactionsForPlayer(playerIndex, transactions);
+				renderTransactionsForPlayer(playerIndex, transactions);
+				rebuildSummaryForPlayer(playerIndex, transactions);
 
-				$("#companyInput").val("");
-				$("#qtyInput").val("");
-				$("#companyInput").trigger("focus");
+				$pane.find(".company-input").val("");
+				$pane.find(".qty-input").val("");
+				$pane.find(".company-input").trigger("focus");
 			});
 
 			$("#clearSessionBtn").on("click", function () {
@@ -353,16 +418,14 @@
 				}
 
 				sessionStorage.removeItem(STORAGE_KEY);
-				renderTransactions([]);
-				rebuildSummary([]);
-				$("#companyInput").val("");
-				$("#qtyInput").val("");
-				$("#companyInput").trigger("focus");
+				for (var i = 1; i <= PLAYER_COUNT; i++) {
+					sessionStorage.removeItem(getPlayerStorageKey(i));
+					renderTransactionsForPlayer(i, []);
+					rebuildSummaryForPlayer(i, []);
+				}
 			});
 
-			var initialTransactions = readTransactions();
-			renderTransactions(initialTransactions);
-			rebuildSummary(initialTransactions);
+			buildPlayerTabs();
 		});
 	</script>
 </body>
